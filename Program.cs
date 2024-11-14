@@ -39,16 +39,16 @@
 
             foreach (var product in productsToOrder)
             {
-                Console.WriteLine($"Produkt: {product.Name}, Kvantitet: {product.Quantity}")
+                Console.WriteLine($"Produkt: {product.Name}, Kvantitet: {product.Quantity}");
             }
             Console.ReadLine();
 
             //Öka priset med 10% för alla produkter i kategorin "Elektronik" - Alex
-            var productsToRaisePrices = inventory.Where(p => p.Categori == "Elektronik");
+            var productsToRaisePrices = inventory.Where(p => p.Category == "Elektronik");
             foreach (var product in productsToRaisePrices)
             {
                 product.Price *= 1.1m; //Ökar priset med 10%
-                Console.WriteLine($"Produkt: {product.Name}, Kvantitet: {product.Price:C}")
+                Console.WriteLine($"Produkt: {product.Name}, Kvantitet: {product.Price:C}");
             }
             Console.ReadLine();
         }

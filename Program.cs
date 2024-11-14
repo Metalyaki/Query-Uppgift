@@ -55,6 +55,9 @@
                             }).ToList();
             return inventory;
         }
-
+        public int TotalWorthOfAllProducts()
+        {
+            var totalWorthOfAllProducts = 
+        }
     }
 }

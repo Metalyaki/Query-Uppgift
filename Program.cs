@@ -81,5 +81,14 @@
             }
             Console.ReadLine();
         }
+        static void saveInventoryData()
+        {
+            var lines = new List<string> { "Id, Namn, Kategori, Kvantitet, Pris, SenastInköp" };
+            lines.AddRange(inventory.Select(p => $"{p.Id}, {p.Name}, {p.Category}, {p.Quantity}, " +
+            $"{p.Price.ToString(CultureInfo.InvariantCulture)}{p.LastRestocked:yyyy-MM-dd}"));
+            File.WriteAllLines("inventory.txt", lines);
+            Console.WriteLine("Ändringar sparade till inventory.txt");
+
+        }
     }
 }

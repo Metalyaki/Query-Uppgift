@@ -118,7 +118,32 @@
                             }).ToList();
             return inventory;
         }
+        static void listProductsAfterPrice()
+        {
+            var productPrice = from p in inventory
+                               where p.Category == "Verktyg"
+                               orderby p.Price ascending
+                               select p;
 
+            foreach (var price in productPrice)
+            {
+                Console.WriteLine($"Produkt: {price.Name} Pris: {price.Price}");
+            } 
+        }
+        
+        static void GetLastRestocked()
+        {
+            var lastRestocked = DateTime.Now.AddDays(-30);
+            var restockedProducts = from p in inventory
+                                    where p.LastRestocked >= lastRestocked
+                                    select p;
+
+            foreach (var product in restockedProducts)
+            {
+                Console.WriteLine($"Produkt: {product.Name} Påfylld: {product.LastRestocked}");
+            }
+        }
+    }
         static void DisplayProductsToOrder() // Alexander
         {
             //Hitta de 5 produkter som har lägst lagersaldo och behöver beställas 

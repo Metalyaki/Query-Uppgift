@@ -41,15 +41,16 @@
                 Console.WriteLine("4. Gruppera produkterna efter kategori och visa antalet produkter i varje kategori. ");
                 Console.WriteLine("5. Hitta alla produkter som inte har blivit påfyllda de senaste 30 dagarna.");
                 Console.WriteLine("6. Öka priset med 10% för alla produkter i kategorin \"Elektronik");
-                Console.WriteLine("7. Skapa en lista med produktnamn och dess lagervärde (pris * kvantitet) för produkter med ett lagervärde över 900 000KR.");
+                Console.WriteLine("7. Skapa en lista med produktnamn och dess lagervärde (pris * kvantitet) för produkter med ett lagervärde över 900K.");
                 Console.WriteLine("8. Hitta den kategori som har det högsta genomsnittliga priset per produkt. ");
                 Console.WriteLine("9. END");
                 string input = Console.ReadLine();
                 switch (input)
                 {
                     case "1":
-
-
+                        // Lista alla produkter i kategorin "Verktyg" sorterade efter pris (stigande). 
+                        Console.WriteLine("Listar alla produkter i verktyg efter pris, stigande");
+                        ListProductsAfterPrice();
                         Console.ReadKey();
                         break;
                     case "2":
@@ -71,7 +72,9 @@
                         Console.ReadKey();
                         break;
                     case "5":
-
+                        // Hitta alla produkter som inte har blivit påfyllda de senaste 30 dagarna.
+                        Console.WriteLine("Hittar alla produkter som ej blivit påfyllda senaste 30 dagarna");
+                        GetLastRestocked();
                         Console.ReadKey();
                         break;
                     case "6":
@@ -118,7 +121,7 @@
                             }).ToList();
             return inventory;
         }
-        static void listProductsAfterPrice()
+        static void ListProductsAfterPrice() // Pontus
         {
             var productPrice = from p in inventory
                                where p.Category == "Verktyg"
@@ -131,7 +134,7 @@
             } 
         }
         
-        static void GetLastRestocked()
+        static void GetLastRestocked() // Pontus
         {
             var lastRestocked = DateTime.Now.AddDays(-30);
             var restockedProducts = from p in inventory
@@ -143,7 +146,7 @@
                 Console.WriteLine($"Produkt: {product.Name} Påfylld: {product.LastRestocked}");
             }
         }
-    }
+    
         static void DisplayProductsToOrder() // Alexander
         {
             //Hitta de 5 produkter som har lägst lagersaldo och behöver beställas 
@@ -165,7 +168,7 @@
             foreach (var product in productsToRaisePrices)
             {
                 product.Price *= 1.1m; //Ökar priset med 10%
-                Console.WriteLine($"Produkt: {product.Name}, Kvantitet: {product.Price:C}");
+                Console.WriteLine($"Produkt: {product.Name}, Nytt pris: {product.Price:C}");
             }
             Console.ReadLine();
         }

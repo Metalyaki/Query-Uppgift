@@ -59,12 +59,14 @@
                         break;
                     case "3":
                         //Beräkna det totala värdet av alla produkter i lager.
-                        Console.WriteLine("[Total of all products in stock]");
+                        Console.WriteLine("Totala värdet av alla produkter");
                         TotalWorthOfAllProducts();
                         Console.ReadKey();
                         break;
                     case "4":
-
+                        // Gruppera produkterna efter kategori och visa antalet produkter i varje kategori. 
+                        Console.WriteLine("Antal produkter per kategori");
+                        GroupProducts();
                         Console.ReadKey();
                         break;
                     case "5":
@@ -77,7 +79,7 @@
                         break;
                     case "7":
                         //Skapa en lista med produktnamn och dess lagervärde (pris * kvantitet) för produkter med ett lagervärde över.
-                        ProductsInventoryValueOver1000();
+                        ProductsInventoryValueOver();
                         Console.ReadKey();
                         break;
                     case "8":
@@ -88,13 +90,8 @@
                         System.Environment.Exit(0);
                         break;
                         
-
                 }
-
-
             }
-
-            Console.ReadLine();
         }
 
         static List<Product> LoadInventoryData()
@@ -150,11 +147,10 @@
             }
 
         }
-    }
-}
-        static void GroupProducts()
+
+        static void GroupProducts() // Alfons Newberg
         {
-            // Gruppera produkterna efter kategori och visa antalet produkter i varje kategori. Alfons Newberg
+            // Gruppera produkterna efter kategori och visa antalet produkter i varje kategori. 
             var groupProducts = from gP in inventory
                                 group gP by gP.Category into g
                                 orderby g.Key
@@ -170,9 +166,9 @@
             }
 
         }
-        static void HighestPriceCat()
+        static void HighestPriceCat() // Alfons Newberg
         {
-            // Hitta den kategori som har det högsta genomsnittliga priset per produkt. Alfons Newberg
+            // Hitta den kategori som har det högsta genomsnittliga priset per produkt.
 
             var findHighestPriceCat = (from product in inventory
                                       group product by product.Category into h
@@ -182,12 +178,12 @@
                                           Category = h.Key,
                                           AvgPrice = h.Average(p => p.Price)
 
-                                      }).OrderByDescending(c => c.AvgPrice) // Sort by average price in descending order
+                                      }).OrderByDescending(c => c.AvgPrice)
                                        .First();
 
             Console.WriteLine($"Kategori med högsta genomsnittspris per produkt: {findHighestPriceCat.Category}");
             Console.WriteLine($"Genomsnittligt pris: {findHighestPriceCat.AvgPrice:C}");
 
         }
-}
+    }
 }

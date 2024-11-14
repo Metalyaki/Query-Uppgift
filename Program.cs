@@ -5,6 +5,7 @@
     using System.Globalization;
     using System.IO;
     using System.Linq;
+    using System.Runtime.ConstrainedExecution;
 
     class Product
     {
@@ -150,4 +151,43 @@
 
         }
     }
+}
+        static void GroupProducts()
+        {
+            // Gruppera produkterna efter kategori och visa antalet produkter i varje kategori. Alfons Newberg
+            var groupProducts = from gP in inventory
+                                group gP by gP.Category into g
+                                orderby g.Key
+                                select new
+                                {
+                                    Kategori = g.Key,
+                                    Antal =  g.Count()
+                                };
+
+            foreach (var gp in groupProducts)
+            {
+                Console.WriteLine(gp);
+            }
+
+        }
+        static void HighestPriceCat()
+        {
+            // Hitta den kategori som har det högsta genomsnittliga priset per produkt. Alfons Newberg
+
+            var findHighestPriceCat = (from product in inventory
+                                      group product by product.Category into h
+
+                                      select new
+                                      {
+                                          Category = h.Key,
+                                          AvgPrice = h.Average(p => p.Price)
+
+                                      }).OrderByDescending(c => c.AvgPrice) // Sort by average price in descending order
+                                       .First();
+
+            Console.WriteLine($"Kategori med högsta genomsnittspris per produkt: {findHighestPriceCat.Category}");
+            Console.WriteLine($"Genomsnittligt pris: {findHighestPriceCat.AvgPrice:C}");
+
+        }
+}
 }

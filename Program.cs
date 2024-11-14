@@ -113,7 +113,31 @@
                             }).ToList();
             return inventory;
         }
+        static void DisplayProductsToOrder()
+        {
+            //Hitta de 5 produkter som har lägst lagersaldo och behöver beställas - Alex
+            Console.WriteLine("Hitta de 5 produkter som har lägst lagersaldo och behöver beställas");
+            var productsToOrder = inventory
+                .OrderBy(p => p.Quantity)
+                .Take(5);
 
+            foreach (var product in productsToOrder)
+            {
+                Console.WriteLine($"Produkt: {product.Name}, Kvantitet: {product.Quantity}");
+            }
+            Console.ReadLine();
+        }
+        static void RaisePricesForElectronics()
+        {
+            //Öka priset med 10% för alla produkter i kategorin "Elektronik" - Alex
+            var productsToRaisePrices = inventory.Where(p => p.Category == "Elektronik");
+            foreach (var product in productsToRaisePrices)
+            {
+                product.Price *= 1.1m; //Ökar priset med 10%
+                Console.WriteLine($"Produkt: {product.Name}, Kvantitet: {product.Price:C}");
+            }
+            Console.ReadLine();
+        }
         public static void TotalWorthOfAllProducts()//Anders
         {
             //Beräkna det totala värdet av alla produkter i lager.

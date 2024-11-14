@@ -53,8 +53,9 @@
                         Console.ReadKey();
                         break;
                     case "2":
-
-
+                        //Hitta de 5 produkter som har lägst lagersaldo och behöver beställas 
+                        Console.WriteLine("Hitta de 5 produkter som har lägst lagersaldo och behöver beställas");
+                        DisplayProductsToOrder();
                         Console.ReadKey();
                         break;
                     case "3":
@@ -74,7 +75,9 @@
                         Console.ReadKey();
                         break;
                     case "6":
-
+                        //Öka priset med 10% för alla produkter i kategorin "Elektronik" 
+                        Console.WriteLine("Ökar priset på elektronik med 10%");
+                        RaisePricesForElectronics();
                         Console.ReadKey();
                         break;
                     case "7":
@@ -83,7 +86,9 @@
                         Console.ReadKey();
                         break;
                     case "8":
-
+                        // Hitta den kategori som har det högsta genomsnittliga priset per produkt.
+                        Console.WriteLine("Hittar kategori med högsta genomsnittspris");
+                        HighestPriceCat();
                         Console.ReadKey();
                         break;
                     case "9":
@@ -113,10 +118,10 @@
                             }).ToList();
             return inventory;
         }
-        static void DisplayProductsToOrder()
+
+        static void DisplayProductsToOrder() // Alexander
         {
-            //Hitta de 5 produkter som har lägst lagersaldo och behöver beställas - Alex
-            Console.WriteLine("Hitta de 5 produkter som har lägst lagersaldo och behöver beställas");
+            //Hitta de 5 produkter som har lägst lagersaldo och behöver beställas 
             var productsToOrder = inventory
                 .OrderBy(p => p.Quantity)
                 .Take(5);
@@ -127,9 +132,10 @@
             }
             Console.ReadLine();
         }
-        static void RaisePricesForElectronics()
+
+        static void RaisePricesForElectronics() // Alexander
         {
-            //Öka priset med 10% för alla produkter i kategorin "Elektronik" - Alex
+            //Öka priset med 10% för alla produkter i kategorin "Elektronik" 
             var productsToRaisePrices = inventory.Where(p => p.Category == "Elektronik");
             foreach (var product in productsToRaisePrices)
             {
@@ -138,6 +144,7 @@
             }
             Console.ReadLine();
         }
+
         public static void TotalWorthOfAllProducts()//Anders
         {
             //Beräkna det totala värdet av alla produkter i lager.

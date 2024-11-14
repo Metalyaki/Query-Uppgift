@@ -76,7 +76,7 @@
                         break;
                     case "7":
                         //Skapa en lista med produktnamn och dess lagervärde (pris * kvantitet) för produkter med ett lagervärde över.
-                        ProductsInventoryValueOver1000();
+                        ProductsInventoryValueOver();
                         Console.ReadKey();
                         break;
                     case "8":
